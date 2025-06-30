@@ -16,9 +16,10 @@ function clearDisplay() {
 
 function calculate() {
   try {
-    let expr = currentInput.replace(/[^-+*/().\d√]/g, '');
-    // Replace all √(expression) with Math.sqrt(expression)
-    expr = expr.replace(/√\(/g, 'Math.sqrt(');
+    // Replace all √( with Math.sqrt(
+    let expr = currentInput.replace(/√\(/g, 'Math.sqrt(');
+    // Remove any characters except numbers, operators, parentheses, dot, and letters (for Math.sqrt)
+    expr = expr.replace(/[^-+*/().\dA-Za-z]/g, '');
     let result = eval(expr);
     if (result === undefined) result = 0;
     display.textContent = result;
