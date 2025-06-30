@@ -25,6 +25,8 @@ body {
   background: #222;
   color: #fff;
   font-size: 2rem;
+  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+  letter-spacing: 0.1em;
   border-radius: 8px;
   margin-bottom: 1rem;
   text-align: right;
@@ -172,7 +174,7 @@ button:active {
   background: #e53935;
   color: #fff;
 }
-.operator, .equal {
+.operator, .equal, .root {
   background: #f9a825;
   color: #fff;
 }
@@ -184,4 +186,58 @@ button:active {
   border-radius: 8px;
   display: block;
   grid-column: span 4;
+}
+.fraction-percent-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.side-btn {
+  background: #757575;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  width: 80px;
+  height: 60px;
+  font-size: 1.7rem;
+  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.side-btn:active {
+  background: #555;
+}
+.fraction {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  width: 1.2em;
+}
+.fraction .num, .fraction .den {
+  display: block;
+  font-size: 1.1em;
+  line-height: 1.1em;
+  min-width: 1em;
+  min-height: 1em;
+  outline: none;
+  border: none;
+  background: transparent;
+  text-align: center;
+}
+.fraction .num[contenteditable], .fraction .den[contenteditable] {
+  border-bottom: 1px dotted #bbb;
+}
+.fraction .line {
+  display: block;
+  border-top: 2px solid #333;
+  margin: 0.15em auto;
+  width: 1.5em;
+  height: 0;
+  background: none;
+  transform: none;
 } 

@@ -64,11 +64,14 @@ function showWarning(msg) {
 }
 
 function setButtonsDisabled(disabled) {
-  document.querySelectorAll('.buttons button, .ans, .arrow-btn, .equal').forEach(btn => {
+  document.querySelectorAll('.buttons button, .ans, .arrow-btn, .equal, .side-btn').forEach(btn => {
     if (btn.id !== 'power-btn') btn.disabled = disabled;
   });
   document.querySelectorAll('.arrow-pad .arrow-btn').forEach(btn => {
     btn.disabled = disabled;
+  });
+  document.querySelectorAll('.fraction .num, .fraction .den').forEach(span => {
+    span.contentEditable = !disabled;
   });
 }
 
@@ -106,9 +109,19 @@ function appendToDisplay(value) {
     currentInput = '';
     cursorPos = 0;
   }
-  // Insert value at cursor position
-  currentInput = currentInput.slice(0, cursorPos) + value + currentInput.slice(cursorPos);
-  cursorPos += value.length;
+  // If the cursor is on a square, delete it and insert the value
+  if (currentInput[cursorPos] === '□') {
+    currentInput = currentInput.slice(0, cursorPos) + value + currentInput.slice(cursorPos + 1);
+    cursorPos += value.length;
+  } else if (currentInput[cursorPos - 1] === '□') {
+    // If the cursor is immediately after a square, replace the square and move the cursor
+    currentInput = currentInput.slice(0, cursorPos - 1) + value + currentInput.slice(cursorPos);
+    cursorPos = cursorPos - 1 + value.length;
+  } else {
+    // Insert value at cursor position
+    currentInput = currentInput.slice(0, cursorPos) + value + currentInput.slice(cursorPos);
+    cursorPos += value.length;
+  }
   renderDisplay();
 }
 
@@ -144,6 +157,24 @@ function appendAns() {
   renderDisplay();
 }
 
+function insertFraction() {
+  if (!isOn) {
+    showWarning('⚠️ Turn ON the calculator!');
+    return;
+  }
+  if (greetingActive || warningActive) {
+    greetingActive = false;
+    warningActive = false;
+    currentInput = '';
+    cursorPos = 0;
+  }
+  // Insert plain text fraction at cursor position
+  currentInput = currentInput.slice(0, cursorPos) + '□/□' + currentInput.slice(cursorPos);
+  cursorPos += 1; // Place cursor before the first box
+  renderDisplay();
+}
+
+// Update calculate to use extractFractions
 function calculate() {
   if (!isOn) {
     showWarning('⚠️ Turn ON the calculator!');
@@ -157,6 +188,8 @@ function calculate() {
   }
   try {
     let expr = currentInput.replace(/Ans/g, lastAnswer);
+    expr = expr.replace(/(\d+(?:\.\d+)?)%/g, '($1/100)');
+    expr = expr.replace(/□\/□/g, '(0/0)');
     expr = expr.replace(/√\(([^)]+)\)/g, 'Math.sqrt($1)');
     expr = expr.replace(/√(-?\d+(?:\.\d+)?)/g, 'Math.sqrt($1)');
     let result = eval(expr);

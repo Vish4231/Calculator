@@ -10,11 +10,15 @@
   <div class="calculator">
     <button id="power-btn" onclick="togglePower()">On/Off</button>
     <div class="display" id="display">0</div>
-    <div class="arrow-pad">
-      <button class="arrow-btn up" onclick="moveCursor('up')">&#8593;</button>
-      <button class="arrow-btn left" onclick="moveCursor('left')">&#8592;</button>
-      <button class="arrow-btn right" onclick="moveCursor('right')">&#8594;</button>
-      <button class="arrow-btn down" onclick="moveCursor('down')">&#8595;</button>
+    <div class="fraction-percent-row">
+      <button class="side-btn fraction-btn" style="font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;" onclick="insertFraction()">□/□</button>
+      <div class="arrow-pad">
+        <button class="arrow-btn up" onclick="moveCursor('up')">&#8593;</button>
+        <button class="arrow-btn left" onclick="moveCursor('left')">&#8592;</button>
+        <button class="arrow-btn right" onclick="moveCursor('right')">&#8594;</button>
+        <button class="arrow-btn down" onclick="moveCursor('down')">&#8595;</button>
+      </div>
+      <button class="side-btn percent-btn" onclick="appendToDisplay('%')">%</button>
     </div>
     <div class="buttons">
       <button class="clear" onclick="clearDisplay()">C</button>
