@@ -44,7 +44,7 @@ body {
 }
 .buttons {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 button {
@@ -111,19 +111,49 @@ button:active {
   margin-bottom: 1rem;
   gap: 1rem;
 }
+.arrow-pad {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 1.5rem auto 2.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .arrow-btn {
+  position: absolute;
   background: #222;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  width: 100%;
-  height: 3rem;
-  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.3rem;
   cursor: pointer;
   transition: background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.arrow-btn.up {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.arrow-btn.down {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.arrow-btn.left {
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.arrow-btn.right {
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
 }
 .arrow-btn:active {
   background: #555;
@@ -141,4 +171,17 @@ button:active {
 .del {
   background: #e53935;
   color: #fff;
+}
+.operator, .equal {
+  background: #f9a825;
+  color: #fff;
+}
+.equal {
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem 0;
+  border-radius: 8px;
+  display: block;
+  grid-column: span 4;
 } 

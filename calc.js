@@ -64,13 +64,15 @@ function showWarning(msg) {
 }
 
 function setButtonsDisabled(disabled) {
-  document.querySelectorAll('.buttons button, .ans, .arrow-btn').forEach(btn => {
+  document.querySelectorAll('.buttons button, .ans, .arrow-btn, .equal').forEach(btn => {
     if (btn.id !== 'power-btn') btn.disabled = disabled;
+  });
+  document.querySelectorAll('.arrow-pad .arrow-btn').forEach(btn => {
+    btn.disabled = disabled;
   });
 }
 
-function moveCalculator(direction) {
-  // Now moves the cursor instead of the calculator
+function moveCursor(direction) {
   if (!isOn) {
     showWarning('⚠️ Turn ON the calculator!');
     return;
@@ -85,6 +87,10 @@ function moveCalculator(direction) {
     if (cursorPos > 0) cursorPos--;
   } else if (direction === 'right') {
     if (cursorPos < currentInput.length) cursorPos++;
+  } else if (direction === 'up') {
+    cursorPos = 0;
+  } else if (direction === 'down') {
+    cursorPos = currentInput.length;
   }
   renderDisplay();
 }
@@ -173,96 +179,6 @@ renderDisplay();
 
 function togglePower() {
   setCalculatorPower(!isOn);
-}
-
-function appendToDisplay(value) {
-  if (!isOn) {
-    showWarning('⚠️ Turn ON the calculator!');
-    return;
-  }
-  if (greetingActive || warningActive) {
-    display.classList.remove('greeting', 'warning');
-    display.textContent = '';
-    currentInput = '';
-    greetingActive = false;
-    warningActive = false;
-  }
-  if (display.textContent === '0' && value !== '.') {
-    currentInput = '';
-  }
-  currentInput += value;
-  display.textContent = currentInput;
-}
-
-function clearDisplay() {
-  if (!isOn) {
-    showWarning('⚠️ Turn ON the calculator!');
-    return;
-  }
-  if (greetingActive || warningActive) {
-    greetingActive = false;
-    warningActive = false;
-    currentInput = '';
-    cursorPos = 0;
-  }
-  currentInput = '';
-  cursorPos = 0;
-  renderDisplay();
-}
-
-function moveCalculator(direction) {
-  if (direction === 'left') {
-    calcLeft -= 5;
-  } else if (direction === 'right') {
-    calcLeft += 5;
-  }
-  if (calcLeft < 0) calcLeft = 0;
-  if (calcLeft > 100) calcLeft = 100;
-  calculator.style.left = calcLeft + '%';
-}
-
-function appendAns() {
-  if (!isOn) {
-    showWarning('⚠️ Turn ON the calculator!');
-    return;
-  }
-  if (greetingActive || warningActive) {
-    display.classList.remove('greeting', 'warning');
-    display.textContent = '';
-    currentInput = '';
-    greetingActive = false;
-    warningActive = false;
-  }
-  currentInput += 'Ans';
-  display.textContent = currentInput;
-}
-
-function calculate() {
-  if (!isOn) {
-    showWarning('⚠️ Turn ON the calculator!');
-    return;
-  }
-  if (greetingActive || warningActive) {
-    display.classList.remove('greeting', 'warning');
-    display.textContent = '';
-    currentInput = '';
-    greetingActive = false;
-    warningActive = false;
-  }
-  try {
-    let expr = currentInput;
-    expr = expr.replace(/Ans/g, lastAnswer);
-    expr = expr.replace(/√\(([^)]+)\)/g, 'Math.sqrt($1)');
-    expr = expr.replace(/√(-?\d+(?:\.\d+)?)/g, 'Math.sqrt($1)');
-    let result = eval(expr);
-    if (result === undefined) result = 0;
-    display.textContent = result;
-    currentInput = result.toString();
-    lastAnswer = result;
-  } catch (e) {
-    display.textContent = 'Error';
-    currentInput = '';
-  }
 }
 
 function deleteAtCursor() {
