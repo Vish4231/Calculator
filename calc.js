@@ -10,13 +10,13 @@ function setCalculatorPower(state) {
   if (isOn) {
     calculator.classList.add('on');
     calculator.classList.remove('off');
-    smileMessage.textContent = '😊 Hello';
+    smileMessage.textContent = '🙂 Hello';
     display.textContent = currentInput || '0';
     setButtonsDisabled(false);
   } else {
     calculator.classList.remove('on');
     calculator.classList.add('off');
-    smileMessage.textContent = '😴 Bye';
+    smileMessage.textContent = '😐 Bye';
     display.textContent = '';
     setButtonsDisabled(true);
   }
