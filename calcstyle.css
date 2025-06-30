@@ -71,6 +71,11 @@ button:active {
   background: #bdbdbd;
 }
 #power-btn {
+  position: static;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 0.5rem;
   background: #000;
   color: #fff;
   border: none;
