@@ -4,67 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
-  <style>
-    body {
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-    }
-    .calculator {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-      width: 320px;
-    }
-    .display {
-      width: 100%;
-      height: 60px;
-      background: #222;
-      color: #fff;
-      font-size: 2rem;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      text-align: right;
-      padding: 0.5rem 1rem;
-      box-sizing: border-box;
-      overflow-x: auto;
-    }
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-    }
-    button {
-      padding: 1rem;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 8px;
-      background: #e0e1e6;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button.operator {
-      background: #f9a825;
-      color: #fff;
-    }
-    button.equal {
-      background: #43a047;
-      color: #fff;
-      grid-column: span 2;
-    }
-    button.clear {
-      background: #e53935;
-      color: #fff;
-    }
-    button:active {
-      background: #bdbdbd;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="calculator">
@@ -91,35 +31,6 @@
       <button class="equal" onclick="calculate()">=</button>
     </div>
   </div>
-  <script>
-    const display = document.getElementById('display');
-    let currentInput = '';
-
-    function appendToDisplay(value) {
-      if (display.textContent === '0' && value !== '.') {
-        currentInput = '';
-      }
-      currentInput += value;
-      display.textContent = currentInput;
-    }
-
-    function clearDisplay() {
-      currentInput = '';
-      display.textContent = '0';
-    }
-
-    function calculate() {
-      try {
-        // Evaluate the expression safely
-        let result = eval(currentInput.replace(/[^-+*/().\d]/g, ''));
-        if (result === undefined) result = 0;
-        display.textContent = result;
-        currentInput = result.toString();
-      } catch (e) {
-        display.textContent = 'Error';
-        currentInput = '';
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html> 
