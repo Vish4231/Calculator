@@ -13,11 +13,11 @@ body {
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.1);
   width: 320px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition: left 0.2s, top 0.2s;
+  position: static;
+  margin: 0 auto;
+  left: unset;
+  top: unset;
+  transform: none;
 }
 .display {
   width: 100%;
@@ -127,4 +127,18 @@ button:active {
 }
 .arrow-btn:active {
   background: #555;
+}
+.blinking-cursor {
+  display: inline-block;
+  width: 1ch;
+  color: #43a047;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.del {
+  background: #e53935;
+  color: #fff;
 } 

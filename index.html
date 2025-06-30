@@ -7,15 +7,12 @@
   <link rel="stylesheet" href="calcstyle.css">
 </head>
 <body>
-  <div class="move-arrows">
-    <button class="arrow-btn" onclick="moveCalculator('left')">&#8592;</button>
-    <button class="arrow-btn" onclick="moveCalculator('right')">&#8594;</button>
-  </div>
   <div class="calculator">
     <button id="power-btn" onclick="togglePower()">On/Off</button>
     <div class="display" id="display">0</div>
     <div class="buttons">
       <button class="clear" onclick="clearDisplay()">C</button>
+      <button class="del" onclick="deleteAtCursor()">Del</button>
       <button class="ans" onclick="appendAns()">Ans</button>
       <button onclick="appendToDisplay('(')">(</button>
       <button onclick="appendToDisplay(')')">)</button>
