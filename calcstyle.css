@@ -95,4 +95,8 @@ button:active {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+.ans {
+  background: #757575;
+  color: #fff;
 } 

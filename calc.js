@@ -5,6 +5,7 @@ let currentInput = '';
 let isOn = false;
 let greetingActive = false;
 let warningActive = false;
+let lastAnswer = '';
 
 function setCalculatorPower(state) {
   isOn = state;
@@ -41,7 +42,7 @@ function showWarning(msg) {
 }
 
 function setButtonsDisabled(disabled) {
-  document.querySelectorAll('.buttons button').forEach(btn => {
+  document.querySelectorAll('.buttons button, .ans').forEach(btn => {
     if (btn.id !== 'power-btn') btn.disabled = disabled;
   });
 }
@@ -85,6 +86,22 @@ function clearDisplay() {
   display.textContent = '0';
 }
 
+function appendAns() {
+  if (!isOn) {
+    showWarning('⚠️ Turn ON the calculator!');
+    return;
+  }
+  if (greetingActive || warningActive) {
+    display.classList.remove('greeting', 'warning');
+    display.textContent = '';
+    currentInput = '';
+    greetingActive = false;
+    warningActive = false;
+  }
+  currentInput += lastAnswer;
+  display.textContent = currentInput;
+}
+
 function calculate() {
   if (!isOn) {
     showWarning('⚠️ Turn ON the calculator!');
@@ -105,6 +122,7 @@ function calculate() {
     if (result === undefined) result = 0;
     display.textContent = result;
     currentInput = result.toString();
+    lastAnswer = result;
   } catch (e) {
     display.textContent = 'Error';
     currentInput = '';
