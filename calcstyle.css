@@ -27,6 +27,11 @@ body {
   box-sizing: border-box;
   overflow-x: auto;
 }
+.display.greeting {
+  color: #43a047 !important;
+  font-size: 2rem;
+  text-align: center;
+}
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

@@ -1,25 +1,29 @@
 const display = document.getElementById('display');
-const smileMessage = document.getElementById('smile-message');
 const calculator = document.querySelector('.calculator');
 const powerBtn = document.getElementById('power-btn');
 let currentInput = '';
 let isOn = true;
+let greetingActive = false;
 
 function setCalculatorPower(state) {
   isOn = state;
   if (isOn) {
     calculator.classList.add('on');
     calculator.classList.remove('off');
-    smileMessage.textContent = '🙂 Hello';
-    display.textContent = currentInput || '0';
+    showGreeting('🙂 Hello');
     setButtonsDisabled(false);
   } else {
     calculator.classList.remove('on');
     calculator.classList.add('off');
-    smileMessage.textContent = '😐 Bye';
-    display.textContent = '';
+    showGreeting('😐 Bye');
     setButtonsDisabled(true);
   }
+}
+
+function showGreeting(msg) {
+  display.textContent = msg;
+  display.classList.add('greeting');
+  greetingActive = true;
 }
 
 function setButtonsDisabled(disabled) {
@@ -34,6 +38,12 @@ function togglePower() {
 
 function appendToDisplay(value) {
   if (!isOn) return;
+  if (greetingActive) {
+    display.classList.remove('greeting');
+    display.textContent = '';
+    currentInput = '';
+    greetingActive = false;
+  }
   if (display.textContent === '0' && value !== '.') {
     currentInput = '';
   }
@@ -43,17 +53,27 @@ function appendToDisplay(value) {
 
 function clearDisplay() {
   if (!isOn) return;
+  if (greetingActive) {
+    display.classList.remove('greeting');
+    display.textContent = '';
+    currentInput = '';
+    greetingActive = false;
+  }
   currentInput = '';
   display.textContent = '0';
 }
 
 function calculate() {
   if (!isOn) return;
+  if (greetingActive) {
+    display.classList.remove('greeting');
+    display.textContent = '';
+    currentInput = '';
+    greetingActive = false;
+  }
   try {
     let expr = currentInput;
-    // Replace all √(expression) with Math.sqrt(expression)
     expr = expr.replace(/√\(([^)]+)\)/g, 'Math.sqrt($1)');
-    // Replace all √number (including negative and decimal)
     expr = expr.replace(/√(-?\d+(?:\.\d+)?)/g, 'Math.sqrt($1)');
     let result = eval(expr);
     if (result === undefined) result = 0;
