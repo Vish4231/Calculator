@@ -52,7 +52,6 @@ button.operator.root {
 button.equal {
   background: #43a047;
   color: #fff;
-  grid-column: span 2;
 }
 button.clear {
   background: #e53935;
