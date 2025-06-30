@@ -16,10 +16,11 @@ function clearDisplay() {
 
 function calculate() {
   try {
-    // Replace all √( with Math.sqrt(
-    let expr = currentInput.replace(/√\(/g, 'Math.sqrt(');
-    // Remove any characters except numbers, operators, parentheses, dot, and letters (for Math.sqrt)
-    expr = expr.replace(/[^-+*/().\dA-Za-z]/g, '');
+    let expr = currentInput;
+    // Replace all √(expression) with Math.sqrt(expression)
+    expr = expr.replace(/√\(([^)]+)\)/g, 'Math.sqrt($1)');
+    // Replace all √number (including negative and decimal)
+    expr = expr.replace(/√(-?\d+(?:\.\d+)?)/g, 'Math.sqrt($1)');
     let result = eval(expr);
     if (result === undefined) result = 0;
     display.textContent = result;
