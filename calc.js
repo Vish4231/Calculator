@@ -16,8 +16,10 @@ function clearDisplay() {
 
 function calculate() {
   try {
-    // Evaluate the expression safely
-    let result = eval(currentInput.replace(/[^-+*/().\d]/g, ''));
+    let expr = currentInput.replace(/[^-+*/().\d√]/g, '');
+    // Replace all √(expression) with Math.sqrt(expression)
+    expr = expr.replace(/√\(/g, 'Math.sqrt(');
+    let result = eval(expr);
     if (result === undefined) result = 0;
     display.textContent = result;
     currentInput = result.toString();
