@@ -201,13 +201,16 @@ button:active {
   border-radius: 8px;
   width: 80px;
   height: 60px;
-  font-size: 1.7rem;
+  font-size: 2rem;
   font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
   cursor: pointer;
   transition: background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 }
 .side-btn:active {
   background: #555;
