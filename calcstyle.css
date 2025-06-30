@@ -13,6 +13,11 @@ body {
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.1);
   width: 320px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.2s, top 0.2s;
 }
 .display {
   width: 100%;
@@ -39,7 +44,7 @@ body {
 }
 .buttons {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
 }
 button {
@@ -99,4 +104,27 @@ button:active {
 .ans {
   background: #757575;
   color: #fff;
+}
+.move-arrows {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+.arrow-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  height: 3rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arrow-btn:active {
+  background: #555;
 } 

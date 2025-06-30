@@ -6,6 +6,7 @@ let isOn = false;
 let greetingActive = false;
 let warningActive = false;
 let lastAnswer = '';
+let calcLeft = 50; // percent
 
 function setCalculatorPower(state) {
   isOn = state;
@@ -42,7 +43,7 @@ function showWarning(msg) {
 }
 
 function setButtonsDisabled(disabled) {
-  document.querySelectorAll('.buttons button, .ans').forEach(btn => {
+  document.querySelectorAll('.buttons button, .ans, .arrow-btn').forEach(btn => {
     if (btn.id !== 'power-btn') btn.disabled = disabled;
   });
 }
@@ -86,6 +87,17 @@ function clearDisplay() {
   display.textContent = '0';
 }
 
+function moveCalculator(direction) {
+  if (direction === 'left') {
+    calcLeft -= 5;
+  } else if (direction === 'right') {
+    calcLeft += 5;
+  }
+  if (calcLeft < 0) calcLeft = 0;
+  if (calcLeft > 100) calcLeft = 100;
+  calculator.style.left = calcLeft + '%';
+}
+
 function appendAns() {
   if (!isOn) {
     showWarning('⚠️ Turn ON the calculator!');
@@ -98,7 +110,7 @@ function appendAns() {
     greetingActive = false;
     warningActive = false;
   }
-  currentInput += lastAnswer;
+  currentInput += 'Ans';
   display.textContent = currentInput;
 }
 
@@ -116,6 +128,7 @@ function calculate() {
   }
   try {
     let expr = currentInput;
+    expr = expr.replace(/Ans/g, lastAnswer);
     expr = expr.replace(/√\(([^)]+)\)/g, 'Math.sqrt($1)');
     expr = expr.replace(/√(-?\d+(?:\.\d+)?)/g, 'Math.sqrt($1)');
     let result = eval(expr);

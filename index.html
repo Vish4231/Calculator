@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="calcstyle.css">
 </head>
 <body>
+  <div class="move-arrows">
+    <button class="arrow-btn" onclick="moveCalculator('left')">&#8592;</button>
+    <button class="arrow-btn" onclick="moveCalculator('right')">&#8594;</button>
+  </div>
   <div class="calculator">
     <button id="power-btn" onclick="togglePower()">On/Off</button>
     <div class="display" id="display">0</div>
@@ -37,6 +41,8 @@
       <button class="operator" onclick="appendToDisplay('+')">+</button>
 
       <button class="equal" onclick="calculate()">=</button>
+      <button class="arrow-btn" onclick="moveCalculator('left')">&#8592;</button>
+      <button class="arrow-btn" onclick="moveCalculator('right')">&#8594;</button>
     </div>
   </div>
   <script src="calc.js"></script>
