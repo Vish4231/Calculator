@@ -190,10 +190,16 @@ function calculate() {
     let expr = currentInput.replace(/Ans/g, lastAnswer);
     expr = expr.replace(/(\d+(?:\.\d+)?)%/g, '($1/100)');
     expr = expr.replace(/□\/□/g, '(0/0)');
+    expr = expr.replace(/∛\(([^)]+)\)/g, 'Math.cbrt($1)');
+    expr = expr.replace(/∛(-?\d+(?:\.\d+)?)/g, 'Math.cbrt($1)');
     expr = expr.replace(/√\(([^)]+)\)/g, 'Math.sqrt($1)');
     expr = expr.replace(/√(-?\d+(?:\.\d+)?)/g, 'Math.sqrt($1)');
     let result = eval(expr);
     if (result === undefined) result = 0;
+    // Limit to 10 decimal places if not an integer
+    if (typeof result === 'number' && !Number.isInteger(result)) {
+      result = parseFloat(result.toFixed(10));
+    }
     display.innerHTML = result;
     currentInput = result.toString();
     cursorPos = currentInput.length;

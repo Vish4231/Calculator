@@ -115,19 +115,21 @@ button:active {
 }
 .arrow-pad {
   position: relative;
-  width: 100px;
+  /* width: 100px; */
+  min-width: 100px;
   height: 100px;
   margin: 1.5rem auto 2.5rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 12rem;
 }
 .arrow-btn {
   position: absolute;
   background: #222;
   color: #fff;
   border: none;
-  border-radius: 50%;
+  border-radius: 8px;
   width: 40px;
   height: 40px;
   font-size: 1.3rem;
@@ -243,4 +245,7 @@ button:active {
   height: 0;
   background: none;
   transform: none;
+}
+.side-btn, .arrow-btn, .buttons button, .operator, .equal, .del, .ans {
+  border-radius: 8px;
 } 
